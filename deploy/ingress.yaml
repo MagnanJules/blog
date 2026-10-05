@@ -1,0 +1,23 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: site
+  annotations:
+    cert-manager.io/cluster-issuer: ${ACME_ISSUER}
+spec:
+  ingressClassName: cilium
+  tls:
+    - hosts:
+        - ${PUBLIC_DOMAIN}
+      secretName: site-tls
+  rules:
+    - host: ${PUBLIC_DOMAIN}
+      http:
+        paths:
+          - path: /blog
+            pathType: Prefix
+            backend:
+              service:
+                name: site
+                port:
+                  number: 80
