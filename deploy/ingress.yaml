@@ -8,13 +8,13 @@ spec:
   ingressClassName: cilium
   tls:
     - hosts:
-        - ${PUBLIC_DOMAIN}
+        - blog.${PUBLIC_DOMAIN}
       secretName: blog-tls
   rules:
-    - host: ${PUBLIC_DOMAIN}
+    - host: blog.${PUBLIC_DOMAIN}
       http:
         paths:
-          - path: /blog
+          - path: /
             pathType: Prefix
             backend:
               service:
