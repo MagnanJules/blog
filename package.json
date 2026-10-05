@@ -1,0 +1,12 @@
+{
+  "name": "blog",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "node site/build.mjs"
+  },
+  "dependencies": {
+    "highlight.js": "^11.11.1",
+    "markdown-it": "^14.1.0"
+  }
+}

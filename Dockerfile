@@ -1,2 +1,10 @@
+FROM node:22-alpine AS build
+WORKDIR /app
+COPY package.json yarn.lock ./
+RUN yarn install --frozen-lockfile
+COPY site/ site/
+COPY content/ content/
+RUN yarn build
+
 FROM nginxinc/nginx-unprivileged:1.29-alpine
-COPY public/ /usr/share/nginx/html/
+COPY --from=build /app/dist /usr/share/nginx/html
